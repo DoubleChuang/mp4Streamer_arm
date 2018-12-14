@@ -5,6 +5,22 @@
 -include ../makefile.init
 
 RM := rm -rf
+CROSS_COMPILE?=     arm-hisiv300-linux-
+CPLUSPLUS_COMPILER=$(CROSS_COMPILE)g++
+
+#FFMPEG_PATH=/home/double/test/ffmpeg-3.X/ffmpeg-3.2.4
+#FFMPEG_PATH=/home/double/test/ffmpeg-2.7.7
+
+FFMPEG_PATH=/home/double/Hi3516A/20141215/Hi3516A_SDK_V1.0.3.0/hunt/ffmpeg-2.7.1
+AVRESAMPLE_PATH=$(FFMPEG_PATH)/libavresample
+SWRESAMPLE_PATH=$(FFMPEG_PATH)/libswresample
+AVCODEC_PATH=$(FFMPEG_PATH)/libavcodec
+AVFORMAT_PATH=$(FFMPEG_PATH)/libavformat
+AVDEVICE_PATH=$(FFMPEG_PATH)/libavdevice
+SWSCALE_PATH=$(FFMPEG_PATH)/libswscale
+AVFILTER_PATH=$(FFMPEG_PATH)/libavfilter
+AVUTIL_PATH=$(FFMPEG_PATH)/libavutil
+
 
 # All of the sources participating in the build are defined here
 -include sources.mk
@@ -41,16 +57,16 @@ endif
 all: ffmpegMediaServer
 
 dependents:
-	-cd /mnt/data/steven/workspace/2\ MGV/live/BasicUsageEnvironment/Release && $(MAKE) all
-	-cd /mnt/data/steven/workspace/2\ MGV/live/UsageEnvironment/Release && $(MAKE) all
-	-cd /mnt/data/steven/workspace/2\ MGV/live/groupsock/Release && $(MAKE) all
-	-cd /mnt/data/steven/workspace/2\ MGV/live/liveMedia/Release && $(MAKE) all
+	-cd $(BASICUSAGEENV)/Release && $(MAKE) all
+	-cd $(USAGEENV)/Release && $(MAKE) all
+	-cd $(GROUPSOCK)/Release && $(MAKE) all
+	-cd $(LIVEMEDIA)/Release && $(MAKE) all
 
 # Tool invocations
-ffmpegMediaServer: $(OBJS) $(USER_OBJS) /mnt/data/steven/workspace/2\ MGV/live/BasicUsageEnvironment/Release/libBasicUsageEnvironment.a /mnt/data/steven/workspace/2\ MGV/live/UsageEnvironment/Release/libUsageEnvironment.a /mnt/data/steven/workspace/2\ MGV/live/groupsock/Release/libgroupsock.a /mnt/data/steven/workspace/2\ MGV/live/liveMedia/Release/libliveMedia.a
+ffmpegMediaServer: $(OBJS) $(USER_OBJS) $(BASICUSAGEENV)/Release/libBasicUsageEnvironment.a $(USAGEENV)/Release/libUsageEnvironment.a $(GROUPSOCK)/Release/libgroupsock.a $(LIVEMEDIA)/Release/libliveMedia.a
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	g++ -L"/mnt/data/steven/workspace/2 MGV/live/liveMedia/Release" -L"/mnt/data/steven/workspace/2 MGV/live/BasicUsageEnvironment/Release" -L"/mnt/data/steven/workspace/2 MGV/live/groupsock/Release" -L"/mnt/data/steven/workspace/2 MGV/live/UsageEnvironment/Release" -o "ffmpegMediaServer" $(OBJS) $(USER_OBJS) $(LIBS)
+	$(CPLUSPLUS_COMPILER) -L$(LIVEMEDIA)/Release -L$(BASICUSAGEENV)/Release -L$(GROUPSOCK)/Release -L$(USAGEENV)/Release -L$(AVRESAMPLE_PATH) -L$(SWRESAMPLE_PATH) -L$(AVFORMAT_PATH) -L$(AVDEVICE_PATH) -L$(SWSCALE_PATH) -L$(AVFILTER_PATH) -L$(AVUTIL_PATH) -L$(AVCODEC_PATH) -I$(FFMPEG_PATH) -o "ffmpegMediaServer" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -61,9 +77,9 @@ clean:
 
 .PHONY: all clean dependents
 .SECONDARY:
-/mnt/data/steven/workspace/2\ MGV/live/BasicUsageEnvironment/Release/libBasicUsageEnvironment.a:
-/mnt/data/steven/workspace/2\ MGV/live/UsageEnvironment/Release/libUsageEnvironment.a:
-/mnt/data/steven/workspace/2\ MGV/live/groupsock/Release/libgroupsock.a:
-/mnt/data/steven/workspace/2\ MGV/live/liveMedia/Release/libliveMedia.a:
+$(BASICUSAGEENV)/Release/libBasicUsageEnvironment.a:
+$(USAGEENV)/Release/libUsageEnvironment.a:
+$(GROUPSOCK)/Release/libgroupsock.a:
+$(LIVEMEDIA)/Release/libliveMedia.a:
 
 -include ../makefile.targets

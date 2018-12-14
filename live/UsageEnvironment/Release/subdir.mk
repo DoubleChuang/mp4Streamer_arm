@@ -2,6 +2,11 @@
 # Automatically-generated file. Do not edit!
 ################################################################################
 
+CROSS_COMPILE=arm-hisiv300-linux-
+C_COMPILER=$(CROSS_COMPILE)gcc
+CPLUSPLUS_COMPILER=$(CROSS_COMPILE)g++
+CPLUSPLUS_FLAGS = -DLOCALE_NOT_USED
+
 # Add inputs and outputs from these tool invocations to the build variables 
 O_SRCS += \
 ../HashTable.o \
@@ -30,19 +35,23 @@ CPP_DEPS += \
 ./UsageEnvironment.d \
 ./strDup.d 
 
-
+USAGEENV=/home/double/test/mp4Streamer_arm/live/UsageEnvironment
+GROUPSOCK=/home/double/test/mp4Streamer_arm/live/groupsock
+BASICUSAGEENV=/home/double/test/mp4Streamer_arm/live/BasicUsageEnvironment
+LIVEMEDIA=/home/double/test/mp4Streamer_arm/live/liveMedia
+FFMPEGMEDIA=/home/double/test/mp4Streamer_arm/live/ffmpegMediaServer
 # Each subdirectory must supply rules for building sources it contributes
 %.o: ../%.cpp
 	@echo 'Building file: $<'
-	@echo 'Invoking: GCC C++ Compiler'
-	g++ -I"/mnt/data/steven/workspace/2 MGV/live/UsageEnvironment/include" -I"/mnt/data/steven/workspace/2 MGV/live/groupsock/include" -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	@echo 'XXX Invoking: GCC C++ Compiler'
+	arm-hisiv300-linux-g++ -I$(USAGEENV)/include -I$(USAGEENV) -I$(GROUPSOCK)/include -I$(GROUPSOCK) -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
 %.o: ../%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C Compiler'
-	gcc -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	$(C_COMPILER) -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

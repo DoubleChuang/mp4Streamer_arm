@@ -3,6 +3,9 @@
 ################################################################################
 
 -include ../makefile.init
+CROSS_COMPILE?=     arm-hisiv300-linux-
+C_COMPILER=$(CROSS_COMPILE)gcc
+CPLUSPLUS_COMPILER=$(CROSS_COMPILE)g++
 
 RM := rm -rf
 
@@ -43,7 +46,7 @@ all: libBasicUsageEnvironment.a
 libBasicUsageEnvironment.a: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC Archiver'
-	ar -r  "libBasicUsageEnvironment.a" $(OBJS) $(USER_OBJS) $(LIBS)
+	$(CROSS_COMPILE)ar -r  "libBasicUsageEnvironment.a" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

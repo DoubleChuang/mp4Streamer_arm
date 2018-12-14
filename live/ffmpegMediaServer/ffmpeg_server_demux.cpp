@@ -25,7 +25,7 @@ extern "C" {
 #define AVMEDIA_TYPE_VIDEO 0
 #define AVMEDIA_TYPE_AUDIO 1
 
-//#define EX_DEBUG
+#define EX_DEBUG
 
 FfmpegServerDemux *FfmpegServerDemux::CreateNew(UsageEnvironment& env,
         char const* filename, Boolean reuse_source) {
@@ -127,7 +127,7 @@ ServerMediaSubsession *FfmpegServerDemux::NewServerMediaSubsession(
     //now, create subsessions
     switch (stream_[stream_id].codec_id) {
     case CODEC_ID_H264:
-        stream_[stream_id].mine_type = "video/MPEG";
+        stream_[stream_id].mine_type = "video/H264";
         sms = FfmpegH264ServerMediaSubsession::CreateNew(*this, stream_id,
                 False);
         break;
@@ -143,7 +143,7 @@ ServerMediaSubsession *FfmpegServerDemux::NewServerMediaSubsession(
         break;
 
     case CODEC_ID_AAC:
-        stream_[stream_id].mine_type = "audio/MPEG";
+        stream_[stream_id].mine_type = "audio/AAC";
         //every aac frame contains 1024 sampales
         stream_[stream_id].duration = (1024 * 1000000)
                 / stream_[stream_id].sample_rate;
@@ -233,7 +233,7 @@ Boolean FfmpegServerDemux::DetectedStream() {
 
 #ifdef EX_DEBUG
             envir() << "audio stream information:\n";
-            envir() << "stream No.:" << i << "\n";
+            envir() << "stream :" << i << "\n";
             envir() << "channels: " << stream_[i].channels << "\n";
             envir() << "sample rate:  " << stream_[i].sample_rate << "\n";
 #endif

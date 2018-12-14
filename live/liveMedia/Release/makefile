@@ -5,7 +5,8 @@
 -include ../makefile.init
 
 RM := rm -rf
-
+CROSS_COMPILE?=     arm-hisiv300-linux-
+CPLUSPLUS_COMPILER=$(CROSS_COMPILE)g++
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include subdir.mk
@@ -43,7 +44,7 @@ all: libliveMedia.a
 libliveMedia.a: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC Archiver'
-	ar -r  "libliveMedia.a" $(OBJS) $(USER_OBJS) $(LIBS)
+	$(CROSS_COMPILE)ar -r  "libliveMedia.a" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

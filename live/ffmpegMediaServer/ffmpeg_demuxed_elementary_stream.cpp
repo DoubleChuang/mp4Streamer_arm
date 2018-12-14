@@ -8,8 +8,8 @@
 #include <GroupsockHelper.hh> 
 #include "ffmpeg_demux.h"
 #include "ffmpeg_demuxed_elementary_stream.h"
-
-//#define EX_DEBUG
+#include <iomanip>
+#define EX_DEBUG
 
 FfmpegDemuxedElementaryStream *FfmpegDemuxedElementaryStream::CreateNew(
         UsageEnvironment & env,
@@ -46,6 +46,7 @@ void FfmpegDemuxedElementaryStream::doGetNextFrame()
             AfterGettingFrame, this, handleClosure, this);
 }
 
+
 void FfmpegDemuxedElementaryStream::AfterGettingFrame1(unsigned  frame_size,
         unsigned  num_truncated_bytes, struct timeval /*presentation_time*/,
         unsigned  /*duration_in_microseconds*/)
@@ -63,9 +64,9 @@ void FfmpegDemuxedElementaryStream::AfterGettingFrame1(unsigned  frame_size,
     envir() << "stream " << stream_id_ << "  ";
         envir()<< "frame size " << frame_size << "  ";
         envir()<< "truncated bytes " << num_truncated_bytes << "  ";
-        envir()<< "presentation time " << (double)(fPresentationTime.tv_sec) << "  " ;
-        envir()<< (double)(fPresentationTime.tv_usec) << "  "
-        << "duration" << fDurationInMicroseconds << "  "
+        envir()<< "presentation time " << (int)(fPresentationTime.tv_sec) << "  " ;
+        envir()<< (int)(fPresentationTime.tv_usec) << "  "
+        << "duration " << fDurationInMicroseconds << "  "
         << "\n";
 #endif
 

@@ -1,6 +1,10 @@
 ################################################################################
 # Automatically-generated file. Do not edit!
 ################################################################################
+CROSS_COMPILE?=     arm-hisiv300-linux-                                               
+C_COMPILER=$(CROSS_COMPILE)gcc
+CPLUSPLUS_COMPILER=$(CROSS_COMPILE)g++
+CPLUSPLUS_FLAGS = -DLOCALE_NOT_USED
 
 -include ../makefile.init
 
@@ -8,7 +12,7 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
--include obj/Debug/mnt/data/steven/workspace/2\ MGV/live/UsageEnvironment/subdir.mk
+#-include obj/Debug/mnt/data/steven/workspace/2\ MGV/live/UsageEnvironment/subdir.mk
 -include subdir.mk
 -include objects.mk
 
@@ -44,7 +48,7 @@ all: libUsageEnvironment.a
 libUsageEnvironment.a: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC Archiver'
-	ar -r  "libUsageEnvironment.a" $(OBJS) $(USER_OBJS) $(LIBS)
+	$(CROSS_COMPILE)ar -r  "libUsageEnvironment.a" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

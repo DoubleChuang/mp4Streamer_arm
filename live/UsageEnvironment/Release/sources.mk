@@ -24,5 +24,5 @@ C_UPPER_DEPS :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 . \
-obj/Debug/mnt/data/steven/workspace/2\ MGV/live/UsageEnvironment \
+#obj/Debug/mnt/data/steven/workspace/2\ MGV/live/UsageEnvironment \
 

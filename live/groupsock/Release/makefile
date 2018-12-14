@@ -3,12 +3,15 @@
 ################################################################################
 
 -include ../makefile.init
+CROSS_COMPILE?=     arm-hisiv300-linux-
+C_COMPILER=$(CROSS_COMPILE)gcc
+CPLUSPLUS_COMPILER=$(CROSS_COMPILE)g++
 
 RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
--include obj/Debug/mnt/data/steven/workspace/2\ MGV/live/groupsock/subdir.mk
+#-include obj/Debug/mnt/data/steven/workspace/2\ MGV/live/groupsock/subdir.mk
 -include subdir.mk
 -include objects.mk
 
@@ -44,7 +47,7 @@ all: libgroupsock.a
 libgroupsock.a: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC Archiver'
-	ar -r  "libgroupsock.a" $(OBJS) $(USER_OBJS) $(LIBS)
+	$(CROSS_COMPILE)ar -r  "libgroupsock.a" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

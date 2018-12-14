@@ -1,0 +1,10 @@
+#  Hi3516A
+export CROSS:=arm-hisiv300-linux-
+export CC:=$(CROSS)gcc
+export CXX:=$(CROSS)g++
+export AR:=$(CROSS)ar
+export LD:=$(CROSS)ld
+export STRIP:=$(CROSS)strip
+export RANLIB:=$(CROSS)ranlib
+export Platform:=Hi3516A
+

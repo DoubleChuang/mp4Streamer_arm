@@ -472,7 +472,7 @@ int FfmpegDemux::ReadOneFrame(AVPacket* packet, boolean &has_extra_data) {
             //pps and sps
 //            const char start_code[4] = { 0, 0, 0, 1 };
 
-            _264stream = stream_id;
+            //_264stream = stream_id;
             if(h264bsfc  == NULL)
             {
             	h264bsfc =  av_bitstream_filter_init("h264_mp4toannexb");

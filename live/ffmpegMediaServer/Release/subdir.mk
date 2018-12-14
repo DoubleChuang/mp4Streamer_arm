@@ -3,6 +3,9 @@
 ################################################################################
 
 # Add inputs and outputs from these tool invocations to the build variables 
+CROSS_COMPILE?=     arm-hisiv300-linux-
+CPLUSPLUS_COMPILER=$(CROSS_COMPILE)g++
+
 CPP_SRCS += \
 ../DynamicRTSPServer.cpp \
 ../ffmpeg_demux.cpp \
@@ -27,12 +30,16 @@ CPP_DEPS += \
 ./ffmpeg_server_demux.d \
 ./media_server.d 
 
-
+USAGEENV=/home/double/test/mp4Streamer_arm/live/UsageEnvironment
+GROUPSOCK=/home/double/test/mp4Streamer_arm/live/groupsock
+BASICUSAGEENV=/home/double/test/mp4Streamer_arm/live/BasicUsageEnvironment
+LIVEMEDIA=/home/double/test/mp4Streamer_arm/live/liveMedia
+FFMPEGMEDIA=/home/double/test/mp4Streamer_arm/live/ffmpegMediaServer
 # Each subdirectory must supply rules for building sources it contributes
 %.o: ../%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C++ Compiler'
-	g++ -I"/mnt/data/steven/workspace/2 MGV/live/UsageEnvironment/include" -I"/mnt/data/steven/workspace/2 MGV/live/groupsock/include" -I"/mnt/data/steven/workspace/2 MGV/live/BasicUsageEnvironment/include" -I"/mnt/data/steven/workspace/2 MGV/live/liveMedia/include" -I"/mnt/data/steven/workspace/2 MGV/live/ffmpegMediaServer/subsession" -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	$(CPLUSPLUS_COMPILER) -I$(USAGEENV)/include -I$(GROUPSOCK)/include -I$(BASICUSAGEENV)/include -I$(LIVEMEDIA)/include -I$(FFMPEGMEDIA)/subsession -I/home/double/Hi3516A/20141215/Hi3516A_SDK_V1.0.3.0/hunt/ffmpeg-2.7.1 -D__STDC_CONSTANT_MACROS -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

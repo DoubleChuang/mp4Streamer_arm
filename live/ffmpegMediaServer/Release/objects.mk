@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS := -lliveMedia -lBasicUsageEnvironment -lgroupsock -lUsageEnvironment -lavutil -lavformat -lavcodec
+LIBS :=  -lliveMedia -lBasicUsageEnvironment -lgroupsock -lUsageEnvironment -lavutil -lavformat  -lavcodec -lpthread -lswresample
 
