@@ -223,6 +223,8 @@ void FfmpegDemux::ContinueReadProcessing() {
             // - we found a frame for a stream that was being read, but whose
             //   reader is not ready to get the frame right now, or
             // - the source stream has ended.
+            printf("NO FRAME!!\n");
+            NoteElementaryStreamDeletion();
             break;
         }
     }
@@ -315,7 +317,7 @@ int FfmpegDemux::CopyData(void* dst, int dst_max_size, const void* src,
     return num_bytes_to_cpy;
 }
 
-u_int8_t FfmpegDemux::Parse() {
+int FfmpegDemux::Parse() {
     AVPacket packet;
     int acquired_stream_id = -1;
     int stream_id = -1;
@@ -383,6 +385,9 @@ u_int8_t FfmpegDemux::Parse() {
                 have_undelivered_data_ = True;
                 break;
             }
+        }
+        else{            
+            return -2;
         }
 
         av_free_packet(&packet); //must free the packet
@@ -516,6 +521,7 @@ int FfmpegDemux::SaveData(int stream_id, unsigned char* srcbuf, int size,
         }
         out.data_counts++; //TODO:should be delete
     }
+
     return 0;
 }
 

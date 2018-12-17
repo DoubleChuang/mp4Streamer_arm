@@ -60,7 +60,7 @@ private:
             unsigned size, struct timeval presentation_time);
     void ContinueReadProcessing();
 
-    u_int8_t Parse();
+    int Parse();
 
     int ParseH264ExtraDataInMp4(int stream_id);
 

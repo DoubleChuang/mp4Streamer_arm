@@ -74,7 +74,8 @@ ffmpegMediaServer: $(OBJS) $(USER_OBJS) $(BASICUSAGEENV)/Release/libBasicUsageEn
 clean:
 	-$(RM) $(OBJS)$(C++_DEPS)$(C_DEPS)$(CC_DEPS)$(CPP_DEPS)$(EXECUTABLES)$(CXX_DEPS)$(C_UPPER_DEPS) ffmpegMediaServer
 	-@echo ' '
-
+cp:
+	cp ffmpegMediaServer ~/test/Hi3516A/ffmpeg_test
 .PHONY: all clean dependents
 .SECONDARY:
 $(BASICUSAGEENV)/Release/libBasicUsageEnvironment.a:
